@@ -3,8 +3,12 @@ const app = express();
 const dotenv = require('dotenv').config();
 // const bodyparser = require('body-parser')
 const cors = require('cors')
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8000;
+const dbconnection = require('./src/db/index')
 
+dbconnection.on('error',()=>{
+    console.log('error')
+})
 
 app.use(express.json()); // JSON יכולת לקרוא ולהציג מידע מ
 app.use(express.urlencoded({extended:true})); // params יכולת לשלוף מידע מ

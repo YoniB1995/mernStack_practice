@@ -1,18 +1,20 @@
 const mongoose = require('mongoose')
+const dotenv = require('dotenv').config()
+const MONGO_URL = process.env.MONGO_URL
 
 const connectToDB = async (req,res)=>{
-    await mongoose.connect('mongodb://localhost:27017',{
+    await mongoose.connect(MONGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology: true
     })
 }
 
 connectToDB().then(()=>{
-    console.log('MongoDB Connected')
+    console.log('MongoDB Atlas Connected')
 }).catch((err)=>{
     console.log(`Error Message - ${err.message}`)
 })
 
-const db = mongoose.connection;
+const connection = mongoose.connection;
 
-module.exports = db;
+module.exports = connection;
